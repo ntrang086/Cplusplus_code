@@ -1,12 +1,14 @@
 /*Given an array of N elements and L and R, count the number of subarrays
 whose max. element is >= L, <= R. Examples:
-Input : array = [2, 0, 11, 3, 0]
+Input : arr[] = {2, 0, 11, 3, 0}
           L = 1, R = 10
-Output : 4. the sub-arrays are [2], [2, 0], [3], [3, 0]
+Output : 4. The sub-arrays {2}, {2, 0}, {3} 
+and {3, 0} have maximum in range 1-10.
 
-Input : array = [3, 4, 1]
+Input : arr[] = {3, 4, 1}
           L = 2, R = 4 
-Output : 5. the sub-arrays are [3], [4], [3, 4], [4, 1], [3, 4, 1]
+Output : 5. The sub-arrays are {3}, {4}, 
+{3, 4}, {4, 1} and {3, 4, 1} 
 Observations:
 - Elements > R are never inc in any subarray.
 - Elements < L can be inc in subarray as long as there is min. 1 element
@@ -42,6 +44,8 @@ long subarrays_max_in_range(int array[], int n, int l, int r)
         }
         // If an element is within the defined range, we increment inc
         else if (array[i] <= r and array[i] >= l) {
+            result -= count_subarrays(exc)
+            exc = 0
             inc += 1;
         }
         // If an element is < l, then we increment two counts
